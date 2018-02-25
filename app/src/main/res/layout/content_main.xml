@@ -21,4 +21,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/all_events_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </android.support.constraint.ConstraintLayout>
