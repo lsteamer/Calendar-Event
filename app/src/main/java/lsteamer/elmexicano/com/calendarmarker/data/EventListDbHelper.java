@@ -14,11 +14,11 @@ public class EventListDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "eventlist.db";
 
     // If you change the database schema, you must increment the database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //Constructor
-    public EventListDbHelper(Context context, SQLiteDatabase.CursorFactory factory) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public EventListDbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class EventListDbHelper extends SQLiteOpenHelper {
                 EventListContract.EventListEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 EventListContract.EventListEntry.COLUMN_TITLE + " TEXT NOT NULL," +
                 EventListContract.EventListEntry.COLUMN_DESCRIPTION + " TEXT," +
-                EventListContract.EventListEntry.COLUMN_COLOR + " INTEGER NOT NULL," +
+                EventListContract.EventListEntry.COLUMN_COLOR + " TEXT NOT NULL," +
                 EventListContract.EventListEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 "); ";
         // Execute the query
