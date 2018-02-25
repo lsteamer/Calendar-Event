@@ -14,7 +14,7 @@ public class EventListContract {
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_DESCRIPTION = "title";
         public static final String COLUMN_COLOR = "color";
-        public static final String COLUMN_REGISTRY_KIND = "fullday";
+        public static final String COLUMN_TIMESTAMP = "timestamp";
 
     }
 }
