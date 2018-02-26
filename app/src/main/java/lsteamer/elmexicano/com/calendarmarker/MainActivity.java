@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Create an adapter for that cursor to display data
-        mAdapter = new EventListAdapter(this, cursor.getCount());
+        mAdapter = new EventListAdapter(this, cursor);
 
         eventlistRecyclerView.setAdapter(mAdapter);
     }
