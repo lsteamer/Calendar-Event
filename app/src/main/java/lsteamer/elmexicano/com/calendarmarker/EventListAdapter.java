@@ -2,6 +2,7 @@ package lsteamer.elmexicano.com.calendarmarker;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +42,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
            return;
 
        String title = mCursor.getString(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_TITLE));
-       String color = mCursor.getString(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_COLOR));
+       int color = mCursor.getInt(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_COLOR));
+
+       String strColor = Integer.toHexString(color);
+
 
        holder.titleTextView.setText(title);
+       holder.colorTextView.setText(strColor);
+       holder.colorTextView.setBackgroundColor(0xff000000 + Integer.parseInt(strColor,16));
 
     }
 
@@ -55,11 +61,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     class EventViewHolder extends RecyclerView.ViewHolder{
 
         TextView titleTextView;
+        TextView colorTextView;
 
 
         public EventViewHolder(View itemView) {
             super(itemView);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
+            colorTextView = (TextView) itemView.findViewById(R.id.color_text_view);
+
         }
     }
 

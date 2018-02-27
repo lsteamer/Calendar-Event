@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,31 +107,31 @@ public class MainActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "John");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, "nope noe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 13959168);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, "nope noee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16011550);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, "nope noeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16170790);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, "nope noeeeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 753731);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, "nope nowe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16496249);
         list.add(cv);
 
         //insert all guests in one transaction
