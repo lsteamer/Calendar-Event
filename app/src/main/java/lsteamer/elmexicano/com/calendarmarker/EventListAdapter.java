@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
+import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
 /**
  * Created by lsteamer on 25/02/2018.
@@ -44,12 +45,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
        String title = mCursor.getString(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_TITLE));
        int color = mCursor.getInt(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_COLOR));
 
-       String strColor = Integer.toHexString(color);
+       color = ColorUtil.getColorHexInt(color);
 
 
        holder.titleTextView.setText(title);
-       holder.colorTextView.setText(strColor);
-       holder.colorTextView.setBackgroundColor(0xff000000 + Integer.parseInt(strColor,16));
+       holder.colorTextView.setBackgroundColor(color);
 
     }
 

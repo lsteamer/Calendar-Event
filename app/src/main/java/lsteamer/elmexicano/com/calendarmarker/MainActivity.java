@@ -1,6 +1,7 @@
 package lsteamer.elmexicano.com.calendarmarker;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), EventDetailActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -107,31 +108,127 @@ public class MainActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "John");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 13959168);
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 1);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16011550);
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16170790);
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 753731);
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
         cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 16496249);
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
+        list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
+        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
+        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
         list.add(cv);
 
         //insert all guests in one transaction
