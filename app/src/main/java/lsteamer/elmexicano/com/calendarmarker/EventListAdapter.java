@@ -19,7 +19,6 @@ import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.EventViewHolder> {
 
     private Context mContext;
-
     private Cursor mCursor;
 
 

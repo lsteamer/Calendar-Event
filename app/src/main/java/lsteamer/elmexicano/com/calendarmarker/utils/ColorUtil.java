@@ -1,11 +1,18 @@
 package lsteamer.elmexicano.com.calendarmarker.utils;
 
+import java.util.ArrayList;
+
+import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
+
 /**
  * Created by lsteamer on 28/02/2018.
  */
 
 public class ColorUtil {
 
+
+
+    //Static method that returns the Color title given the position.
     public static String getColorName(int color){
 
         switch (color){
@@ -39,6 +46,7 @@ public class ColorUtil {
 
     }
 
+    //Static method that returns the Color code in HEX Integer given the position
     public static int getColorHexInt(int color){
 
         switch (color){
@@ -70,5 +78,21 @@ public class ColorUtil {
                 return 0xff000000 + Integer.parseInt("4285F4",16);
         }
     }
+
+
+
+
+    //Static Method that returns the Array List with Both Color and
+    public static ArrayList<ColorItem> initList(){
+
+        ArrayList<ColorItem> colorStaticArrayList = new ArrayList<>();
+        for(int counter=1; counter<=12; counter++){
+            colorStaticArrayList.add(new ColorItem(ColorUtil.getColorName(counter), ColorUtil.getColorHexInt(counter)));
+        }
+
+
+        return colorStaticArrayList;
+    }
+
 
 }
