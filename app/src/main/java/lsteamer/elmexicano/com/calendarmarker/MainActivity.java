@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +19,21 @@ import java.util.List;
 
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
 import lsteamer.elmexicano.com.calendarmarker.data.EventListDbHelper;
+import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
+import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+    // An Array of ColorItem that will show the colors in the spinner.
+    // Information is included by a static method
+    public final static  ArrayList<ColorItem> mColorList = ColorUtil.initList();
+
+    //The Adapter for the list that will display the events
     private EventListAdapter mAdapter;
 
+    //Our Database
     private SQLiteDatabase mDb;
 
     @Override
@@ -41,16 +50,15 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // On Click, launch a new activity (EventDetailActivity
                 Intent intent = new Intent(getApplicationContext(), EventDetailActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        RecyclerView eventlistRecyclerView;
-
-        // Set Local attributes to corresponding views
-        eventlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_events_list_view);
+        // Create a RecyclerView and set Local attributes to corresponding views
+        RecyclerView eventlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_events_list_view);
 
         // Set layout for the RecyclerView, because it's a list we are using the linear layout
         eventlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
         //Creating a DB Helper (Will create and run the DB for the first time)
         EventListDbHelper dbHelper = new EventListDbHelper(this);
 
+        // We Get a writableDatabase reference
         mDb = dbHelper.getWritableDatabase();
 
         insertFakeData(mDb);
 
-
-        // COMPLETED (7) Run the getAllGuests function and store the result in a Cursor variable
-        Cursor cursor = getAllGuests();
+        // Run the getAllEvents function and store the result in a Cursor variable
+        Cursor cursor = getAllEvents();
 
 
         // Create an adapter for that cursor to display data
@@ -80,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-    private Cursor getAllGuests() {
+    // Returning the result in a type Cursor
+    private Cursor getAllEvents() {
         // Call query on mDb passing in the table name and projection String [] order by COLUMN_TIMESTAMP
         return mDb.query(
                 EventListContract.EventListEntry.TABLE_NAME,

@@ -7,11 +7,9 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 import lsteamer.elmexicano.com.calendarmarker.spinner.ColorAdapter;
 import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
-import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
 /**
  * Created by lsteamer on 28/02/2018.
@@ -19,7 +17,8 @@ import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
 public class EventDetailActivity extends AppCompatActivity {
 
-    private ArrayList<ColorItem> mColorList;
+
+    // The Adapter to display the Colors
     private ColorAdapter mColorAdapter;
 
 
@@ -29,13 +28,14 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_detail);
 
-        mColorList = ColorUtil.initList();
-
+        // Declaring the spinner
         Spinner colorSpinner = findViewById(R.id.color_spinner);
 
-        mColorAdapter = new ColorAdapter( this, mColorList);
-        colorSpinner.setAdapter(mColorAdapter);
+        // New color adapter (using the final static ColorItem ArrayList declared in MainActivity)
+        mColorAdapter = new ColorAdapter( this, MainActivity.mColorList);
 
+        //Set the adapter and a listener
+        colorSpinner.setAdapter(mColorAdapter);
         colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override

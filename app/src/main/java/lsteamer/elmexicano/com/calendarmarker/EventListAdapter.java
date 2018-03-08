@@ -18,10 +18,12 @@ import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.EventViewHolder> {
 
+    // Adapter's Context
     private Context mContext;
+    // Adapter's Cursor
     private Cursor mCursor;
 
-
+    // public constructor
     public EventListAdapter(Context context, Cursor count){
         this.mContext = context;
         this.mCursor = count;
@@ -38,15 +40,19 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
+
+        // if the position doesn't exist
        if(!mCursor.moveToPosition(position))
            return;
 
+       //Getting the values from the database
        String title = mCursor.getString(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_TITLE));
        int color = mCursor.getInt(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_COLOR));
 
+       //getting the color Hexadecimal code
        color = ColorUtil.getColorHexInt(color);
 
-
+       // Set the title and the color
        holder.titleTextView.setText(title);
        holder.colorTextView.setBackgroundColor(color);
 
