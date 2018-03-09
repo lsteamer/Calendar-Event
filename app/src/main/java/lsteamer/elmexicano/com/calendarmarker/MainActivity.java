@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 // On Click, launch a new activity (EventDetailActivity
                 Intent intent = new Intent(getApplicationContext(), EventDetailActivity.class);
                 startActivity(intent);
+
+
+
+                Toast.makeText(MainActivity.this,  " say that to my face" , Toast.LENGTH_LONG).show();
             }
         });
 
@@ -69,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         // We Get a writableDatabase reference
         mDb = dbHelper.getWritableDatabase();
 
-        insertFakeData(mDb);
 
         // Run the getAllEvents function and store the result in a Cursor variable
         Cursor cursor = getAllEvents();
@@ -78,7 +82,21 @@ public class MainActivity extends AppCompatActivity {
         // Create an adapter for that cursor to display data
         mAdapter = new EventListAdapter(this, cursor);
 
+
+
+
+        // Set the Adapter
         eventlistRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // When coming back to the activity, update the Cursor
+        mAdapter.swapCursor(getAllEvents());
+
     }
 
     @Override
@@ -101,168 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 EventListContract.EventListEntry.COLUMN_TIMESTAMP
         );
     }
-
-
-    ////////////////////////////////
-
-
-    public static void insertFakeData(SQLiteDatabase db){
-        if(db == null){
-            return;
-        }
-        //create a list of fake guests
-        List<ContentValues> list = new ArrayList<ContentValues>();
-
-        ContentValues cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "John");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 1);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Tim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 2);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Jessica");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 3);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Larry");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope noeeeee");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 4);
-        list.add(cv);
-
-        cv = new ContentValues();
-        cv.put(EventListContract.EventListEntry.COLUMN_TITLE, "Kim");
-        cv.put(EventListContract.EventListEntry.COLUMN_DESCRIPTION, "nope nowe");
-        cv.put(EventListContract.EventListEntry.COLUMN_COLOR, 5);
-        list.add(cv);
-
-        //insert all guests in one transaction
-        try
-        {
-            db.beginTransaction();
-            //clear the table first
-            db.delete (EventListContract.EventListEntry.TABLE_NAME,null,null);
-            //go through the list and add one by one
-            for(ContentValues c:list){
-                db.insert(EventListContract.EventListEntry.TABLE_NAME, null, c);
-            }
-            db.setTransactionSuccessful();
-        }
-        catch (SQLException e) {
-            //too bad :(
-        }
-        finally
-        {
-            db.endTransaction();
-        }
-
-    }
-
-
-    ////////////////////////////////
 
 
 }

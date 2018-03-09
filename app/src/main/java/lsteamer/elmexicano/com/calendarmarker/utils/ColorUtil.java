@@ -79,7 +79,39 @@ public class ColorUtil {
         }
     }
 
+    //Static method that returns the number given the StringColor
+    public static int getColorNumber(String color){
 
+        switch (color){
+            case "Tomato":
+                return 1;
+            case "Tangerine":
+                return 2;
+            case "Banana":
+                return 3;
+            case "Basil":
+                return 4;
+            case "Sage":
+                return 5;
+            case "Peacock":
+                return 6;
+            case "Blueberry":
+                return 7;
+            case "Lavender":
+                return 8;
+            case "Grape":
+                return 9;
+            case "Flamingo":
+                return 10;
+            case "Graphite":
+                return 11;
+            case "Default Blue":
+                return 12;
+            default:
+                return 12;
+        }
+
+    }
 
 
     //Static Method that returns the Array List with Both Color and

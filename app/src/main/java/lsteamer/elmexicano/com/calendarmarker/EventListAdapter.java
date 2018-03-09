@@ -63,6 +63,22 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         return mCursor.getCount();
     }
 
+    // A method that updates the current cursor
+    public void swapCursor(Cursor newCursor){
+
+        // If the Cursor is null close it to avoid leaking resources
+        if(mCursor.equals(null))
+            mCursor.close();
+
+        // Replace the old cursor with the new one
+        mCursor = newCursor;
+
+        // If the new cursor is null, and if so notify.
+        if(!newCursor.equals(null))
+            this.notifyDataSetChanged();
+
+    }
+
     class EventViewHolder extends RecyclerView.ViewHolder{
 
         TextView titleTextView;
