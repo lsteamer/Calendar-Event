@@ -2,7 +2,6 @@ package lsteamer.elmexicano.com.calendarmarker;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +22,28 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     // Adapter's Cursor
     private Cursor mCursor;
 
+
+
+
+
+    // Declaring an interface
+    private OnItemClicked onClick;
+
+    // And
+    public interface OnItemClicked{
+        void onItemClicked(int position);
+    }
+
+
+
+
     // public constructor
     public EventListAdapter(Context context, Cursor count){
         this.mContext = context;
         this.mCursor = count;
     }
+
+
 
 
     @Override
@@ -52,9 +68,16 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
        //getting the color Hexadecimal code
        color = ColorUtil.getColorHexInt(color);
 
+
+       // Getting an ID for the swiping in MainActivity
+       long id = mCursor.getLong(mCursor.getColumnIndex(EventListContract.EventListEntry._ID));
+
        // Set the title and the color
        holder.titleTextView.setText(title);
        holder.colorTextView.setBackgroundColor(color);
+
+       // Setting the tag object with the id
+       holder.itemView.setTag(id);
 
     }
 

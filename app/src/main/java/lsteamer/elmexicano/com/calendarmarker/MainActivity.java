@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
@@ -83,10 +84,33 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new EventListAdapter(this, cursor);
 
 
-
-
         // Set the Adapter
         eventlistRecyclerView.setAdapter(mAdapter);
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+                // Get the id from the tag
+                long id = (long) viewHolder.itemView.getTag();
+
+                // Pass it to the remove method
+                removeEvent(id);
+
+                // Update the adapter
+                mAdapter.swapCursor(getAllEvents());
+
+            }
+        }).attachToRecyclerView(eventlistRecyclerView);
+
+
+
     }
 
 
@@ -118,6 +142,15 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 EventListContract.EventListEntry.COLUMN_TIMESTAMP
         );
+    }
+
+    // Method that will remove an event from the list
+    private boolean removeEvent(long id){
+
+        // calling the delete method on the database reference.
+        // And checking if something was actually deleted and returning that as a boolean
+        return mDb.delete(EventListContract.EventListEntry.TABLE_NAME,
+                EventListContract.EventListEntry._ID + "=" + id, null) > 0;
     }
 
 
