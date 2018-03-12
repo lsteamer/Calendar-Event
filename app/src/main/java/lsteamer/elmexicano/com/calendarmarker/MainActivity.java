@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
-
-                Toast.makeText(MainActivity.this,  " say that to my face" , Toast.LENGTH_LONG).show();
             }
         });
 
