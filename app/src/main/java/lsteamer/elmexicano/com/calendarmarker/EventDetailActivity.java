@@ -10,13 +10,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
 import lsteamer.elmexicano.com.calendarmarker.data.EventListDbHelper;
 import lsteamer.elmexicano.com.calendarmarker.spinner.ColorAdapter;
-import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
 
 /**
  * Created by lsteamer on 28/02/2018.

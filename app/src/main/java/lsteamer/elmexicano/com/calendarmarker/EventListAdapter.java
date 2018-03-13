@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
@@ -102,10 +103,12 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
     }
 
-    class EventViewHolder extends RecyclerView.ViewHolder{
+    public class EventViewHolder extends RecyclerView.ViewHolder{
 
-        TextView titleTextView;
-        TextView colorTextView;
+
+        public RelativeLayout viewBackground, viewForeground;
+
+        public TextView titleTextView, colorTextView;
 
 
         public EventViewHolder(View itemView) {
