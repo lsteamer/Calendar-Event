@@ -115,6 +115,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             super(itemView);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
             colorTextView = (TextView) itemView.findViewById(R.id.color_text_view);
+            viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
+            viewForeground = (RelativeLayout) itemView.findViewById(R.id.view_foreground);
+
 
         }
     }

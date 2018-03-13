@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +26,9 @@ import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
 import lsteamer.elmexicano.com.calendarmarker.data.EventListDbHelper;
 import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
 import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
+import lsteamer.elmexicano.com.calendarmarker.utils.RecyclerItemTouchHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener  {
 
 
 
@@ -38,10 +42,16 @@ public class MainActivity extends AppCompatActivity {
     //Our Database
     private SQLiteDatabase mDb;
 
+
+    private CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
         // ToolBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -86,27 +96,8 @@ public class MainActivity extends AppCompatActivity {
         eventlistRecyclerView.setAdapter(mAdapter);
 
 
-
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-                // Get the id from the tag
-                long id = (long) viewHolder.itemView.getTag();
-
-                // Pass it to the remove method
-                removeEvent(id);
-
-                // Update the adapter
-                mAdapter.swapCursor(getAllEvents());
-
-            }
-        }).attachToRecyclerView(eventlistRecyclerView);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(eventlistRecyclerView);
 
 
 
@@ -121,6 +112,33 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.swapCursor(getAllEvents());
 
     }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position){
+
+        // Get the id from the tag
+        long id = (long) viewHolder.itemView.getTag();
+
+        // Pass it to the remove method
+        removeEvent(id);
+
+        // Update the adapter
+        mAdapter.swapCursor(getAllEvents());
+
+        // showing snack bar with Undo option
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "some" + " removed from cart!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("UNDO", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        snackbar.setActionTextColor(Color.YELLOW);
+        snackbar.show();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
