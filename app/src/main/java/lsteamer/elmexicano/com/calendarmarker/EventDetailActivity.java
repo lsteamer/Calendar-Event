@@ -92,7 +92,7 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //If there's no title, send an error message
-                if(mNewEventDescription.getText().length() == 0 ){
+                if(mNewEventTitle.getText().length() == 0 ){
 
                 }
                 else{
