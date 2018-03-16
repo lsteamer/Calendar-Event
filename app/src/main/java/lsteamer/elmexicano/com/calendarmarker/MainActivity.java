@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         eventlistRecyclerView.setAdapter(mAdapter);
 
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(eventlistRecyclerView);
 
 

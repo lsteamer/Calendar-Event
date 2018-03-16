@@ -10,4 +10,6 @@
 
     <string name="title_description_string">Title...</string>
     <string name="description_description_string">Description...</string>
+
+    <string name="add_event">Add</string>
 </resources>
