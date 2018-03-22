@@ -28,24 +28,23 @@ import lsteamer.elmexicano.com.calendarmarker.spinner.ColorItem;
 import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 import lsteamer.elmexicano.com.calendarmarker.utils.RecyclerItemTouchHelper;
 
-public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener  {
-
+public class MainActivity extends AppCompatActivity implements EventListAdapter.OnItemClicked, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener  {
 
 
     // An Array of ColorItem that will show the colors in the spinner.
     // Information is included by a static method
     public final static  ArrayList<ColorItem> mColorList = ColorUtil.initList();
 
+
     //The Adapter for the list that will display the events
     private EventListAdapter mAdapter;
+
 
     //Our Database
     private SQLiteDatabase mDb;
 
-    private List<String> somesome;
 
-
-
+    // Coordinator Layout that will be used with the Snackbar
     private CoordinatorLayout coordinatorLayout;
 
     @Override
@@ -54,17 +53,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         setContentView(R.layout.activity_main);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_main);
-
-
-
-        if(somesome==null){
-            Toast.makeText(this, "Shit is null yo'",
-                    Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Shit is no longer null",
-                    Toast.LENGTH_SHORT).show();
-        }
-
 
 
         // ToolBar
@@ -83,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
             }
         });
 
-
         // Create a RecyclerView and set Local attributes to corresponding views
         RecyclerView eventlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_events_list_view);
 
@@ -96,22 +83,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         // We Get a writableDatabase reference
         mDb = dbHelper.getWritableDatabase();
 
-
         // Run the getAllEvents function and store the result in a Cursor variable
         Cursor cursor = getAllEvents();
-
 
         // Create an adapter for that cursor to display data
         mAdapter = new EventListAdapter(this, cursor);
 
-
         // Set the Adapter
         eventlistRecyclerView.setAdapter(mAdapter);
 
+        // Setting the listener to the Adapter
+        mAdapter.setOnClick(this);
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(eventlistRecyclerView);
-
 
 
     }
@@ -126,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
     }
 
+    // Method handling swipes done on the RecyclerView
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position){
 
@@ -134,10 +120,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
 
 
-
-        // showing snack bar with Undo option
+        // Showing snack bar with Undo option
         Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "some" + " removed from cart!", Snackbar.LENGTH_LONG);
+                .make(coordinatorLayout, "Event " + position +" removed from list", Snackbar.LENGTH_LONG);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,6 +150,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         });
         snackbar.setActionTextColor(Color.YELLOW);
         snackbar.show();
+
+    }
+
+
+    // Method handling clicks done on the RecyclerView
+    @Override
+    public void onItemClicked(int position) {
+        // DUMMY TOAST. The events will be registered here
+        Toast.makeText(this, "Item " + position + " clicked",
+                Toast.LENGTH_SHORT).show();
 
     }
 
@@ -198,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         return mDb.delete(EventListContract.EventListEntry.TABLE_NAME,
                 EventListContract.EventListEntry._ID + "=" + id, null) > 0;
     }
+
 
 
 }

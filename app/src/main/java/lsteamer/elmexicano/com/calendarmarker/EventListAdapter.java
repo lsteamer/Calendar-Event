@@ -3,6 +3,7 @@ package lsteamer.elmexicano.com.calendarmarker;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     // Declaring an interface
     private OnItemClicked onClick;
 
-    // And
+    // And coding the interface
     public interface OnItemClicked{
         void onItemClicked(int position);
     }
@@ -44,7 +45,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
 
 
-
     @Override
     public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Get the RecyclerView item layout
@@ -54,7 +54,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     }
 
     @Override
-    public void onBindViewHolder(EventViewHolder holder, int position) {
+    public void onBindViewHolder(EventViewHolder holder, final int position) {
 
         // if the position doesn't exist
        if(!mCursor.moveToPosition(position))
@@ -74,6 +74,15 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
        // Set the title and the color
        holder.titleTextView.setText(title);
        holder.colorTextView.setBackgroundColor(color);
+
+
+       //Adding an OnClickListener
+       holder.titleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClicked(position);
+            }
+       });
 
        // Setting the tag object with the id
        holder.itemView.setTag(id);
@@ -113,7 +122,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
         public TextView titleTextView, colorTextView;
 
-
+        // Constructior for the ViewHolder
         public EventViewHolder(View itemView) {
             super(itemView);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
@@ -121,8 +130,13 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
             viewForeground = (RelativeLayout) itemView.findViewById(R.id.view_foreground);
 
-
         }
+    }
+
+    // Method assigning the OnClick to the interface
+    public void setOnClick(OnItemClicked onClick) {
+
+        this.onClick=onClick;
     }
 
 
