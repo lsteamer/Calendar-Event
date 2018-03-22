@@ -156,6 +156,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
     }
 
+
     // Method that will include a new item in the Database
     public long addToEventList(String title, String description, int color){
 

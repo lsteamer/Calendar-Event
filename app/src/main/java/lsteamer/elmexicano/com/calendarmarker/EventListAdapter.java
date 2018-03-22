@@ -36,8 +36,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     }
 
 
-
-
     // public constructor
     public EventListAdapter(Context context, Cursor count){
         this.mContext = context;
@@ -85,6 +83,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     @Override
     public int getItemCount() {
         return mCursor.getCount();
+    }
+
+
+    public void removeItem(int position){
+
     }
 
     // A method that updates the current cursor

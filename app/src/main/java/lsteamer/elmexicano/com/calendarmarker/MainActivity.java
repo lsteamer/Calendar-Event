@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     //Our Database
     private SQLiteDatabase mDb;
 
+    private List<String> somesome;
+
+
 
     private CoordinatorLayout coordinatorLayout;
 
@@ -50,8 +53,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_main);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+
+
+        if(somesome==null){
+            Toast.makeText(this, "Shit is null yo'",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Shit is no longer null",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
 
         // ToolBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -65,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
                 // On Click, launch a new activity (EventDetailActivity
                 Intent intent = new Intent(getApplicationContext(), EventDetailActivity.class);
                 startActivity(intent);
-
 
             }
         });
@@ -108,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     protected void onRestart() {
         super.onRestart();
 
-        // When coming back to the activity, update the Cursor
+        // When coming back to the activity, update the Cursor & then the adapter
         mAdapter.swapCursor(getAllEvents());
 
     }
@@ -117,13 +130,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position){
 
         // Get the id from the tag
-        long id = (long) viewHolder.itemView.getTag();
+        final long idDeletion = (long) viewHolder.itemView.getTag();
 
-        // Pass it to the remove method
-        removeEvent(id);
 
-        // Update the adapter
-        mAdapter.swapCursor(getAllEvents());
+
 
         // showing snack bar with Undo option
         Snackbar snackbar = Snackbar
@@ -131,6 +141,25 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Update the adapter
+                mAdapter.swapCursor(getAllEvents());
+            }
+        }).addCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int dismissType) {
+                super.onDismissed(snackbar, dismissType);
+
+                if(dismissType != DISMISS_EVENT_ACTION){
+
+
+                    // Delete the event
+                    removeEvent(idDeletion);
+
+                    // Update the adapter
+                    mAdapter.swapCursor(getAllEvents());
+                }
+
 
             }
         });
