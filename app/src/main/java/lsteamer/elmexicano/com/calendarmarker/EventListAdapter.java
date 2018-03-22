@@ -36,8 +36,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     }
 
 
-
-
     // public constructor
     public EventListAdapter(Context context, Cursor count){
         this.mContext = context;
@@ -87,6 +85,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         return mCursor.getCount();
     }
 
+
+    public void removeItem(int position){
+
+    }
+
     // A method that updates the current cursor
     public void swapCursor(Cursor newCursor){
 
@@ -115,6 +118,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             super(itemView);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text_view);
             colorTextView = (TextView) itemView.findViewById(R.id.color_text_view);
+            viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
+            viewForeground = (RelativeLayout) itemView.findViewById(R.id.view_foreground);
+
 
         }
     }

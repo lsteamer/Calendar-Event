@@ -9,12 +9,29 @@
 
     <RelativeLayout
         android:id="@+id/view_background"
+        android:background="@color/bg_row_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageDeleteLeft"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <ImageView
+            android:id="@+id/imageDeleteRight"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
     </RelativeLayout>
-
-
 
 
     <RelativeLayout

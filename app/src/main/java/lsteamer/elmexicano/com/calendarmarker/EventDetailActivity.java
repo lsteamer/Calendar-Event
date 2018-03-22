@@ -6,10 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
@@ -83,45 +86,76 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
 
-        // FloatingActionButton
+        // FloatingActionButton. Calls createNewEntry
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabDetail);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //If there's no title, send an error message
-                if(mNewEventTitle.getText().length() == 0 ){
-
-                }
-                else{
-
-                    // Get the values for the Title, Description
-                    String title = mNewEventTitle.getText().toString();
-                    String description;
-                    if(mNewEventDescription.getText().length() != 0){
-                        description = mNewEventDescription.getText().toString();
-
-                    }
-                    else{
-
-                        // Description can be null
-                        description = "";
-                    }
-
-                    // Call the method to add the event to the Database.
-                    addToEventList(title, description, mNewColor);
-
-                    // Finish this Activity
-                    finish();
-
-                }
-
-
+                createNewEntry();
 
             }
         });
 
     }
+
+    // Displaying a custom menu that will hold an 'Add' button.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    // Handling action bar item clicks
+    // We only have "Add", and it calls createNewEntry
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == R.id.event_detail_add_event){
+            createNewEntry();
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void createNewEntry(){
+
+        //If there's no title, send an error message
+        if(mNewEventTitle.getText().length() == 0 ){
+            Toast.makeText(this, "Title cannot be empty",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+
+            // Get the values for the Title, Description
+            String title = mNewEventTitle.getText().toString();
+            String description;
+            if(mNewEventDescription.getText().length() != 0){
+                description = mNewEventDescription.getText().toString();
+
+            }
+            else{
+
+                // Description can be null
+                description = "";
+            }
+
+            // Call the method to add the event to the Database.
+            addToEventList(title, description, mNewColor);
+
+            // Finish this Activity
+            finish();
+
+        }
+
+
+    }
+
 
     // Method that will include a new item in the Database
     public long addToEventList(String title, String description, int color){
