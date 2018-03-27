@@ -148,6 +148,9 @@ public class EventDetailActivity extends AppCompatActivity {
             // Call the method to add the event to the Database.
             addToEventList(title, description, mNewColor);
 
+            // Result was okay
+            setResult(RESULT_OK);
+
             // Finish this Activity
             finish();
 

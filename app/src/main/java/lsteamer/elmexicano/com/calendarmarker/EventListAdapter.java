@@ -3,13 +3,15 @@ package lsteamer.elmexicano.com.calendarmarker;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+import lsteamer.elmexicano.com.calendarmarker.data.Event;
 import lsteamer.elmexicano.com.calendarmarker.data.EventListContract;
 import lsteamer.elmexicano.com.calendarmarker.utils.ColorUtil;
 
@@ -21,9 +23,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
     // Adapter's Context
     private Context mContext;
-    // Adapter's Cursor
-    private Cursor mCursor;
 
+    // Adapter's Contents
+    private List<Event> mEventList;
 
 
 
@@ -38,9 +40,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
 
     // public constructor
-    public EventListAdapter(Context context, Cursor count){
+    public EventListAdapter(Context context, List<Event> eventList){
         this.mContext = context;
-        this.mCursor = count;
+        this.mEventList = eventList;
     }
 
 
@@ -56,20 +58,15 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
     @Override
     public void onBindViewHolder(EventViewHolder holder, final int position) {
 
-        // if the position doesn't exist
-       if(!mCursor.moveToPosition(position))
-           return;
+        final Event event = mEventList.get(position);
 
        //Getting the values from the database
-       String title = mCursor.getString(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_TITLE));
-       int color = mCursor.getInt(mCursor.getColumnIndex(EventListContract.EventListEntry.COLUMN_COLOR));
+       String title = event.getEventTitle();
+       int color = event.getEventColor();
 
        //getting the color Hexadecimal code
        color = ColorUtil.getColorHexInt(color);
 
-
-       // Getting an ID for the swiping in MainActivity
-       long id = mCursor.getLong(mCursor.getColumnIndex(EventListContract.EventListEntry._ID));
 
        // Set the title and the color
        holder.titleTextView.setText(title);
@@ -84,35 +81,26 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             }
        });
 
-       // Setting the tag object with the id
-       holder.itemView.setTag(id);
 
     }
 
     @Override
     public int getItemCount() {
-        return mCursor.getCount();
+        return mEventList.size();
     }
 
 
-    public void removeItem(int position){
+    public void removeEvent(int position){
+        mEventList.remove(position);
+
+        notifyItemRemoved(position);
 
     }
 
-    // A method that updates the current cursor
-    public void swapCursor(Cursor newCursor){
+    public void addEvent(Event event, int position){
+        mEventList.add(position, event);
 
-        // If the Cursor is null close it to avoid leaking resources
-        if(mCursor.equals(null))
-            mCursor.close();
-
-        // Replace the old cursor with the new one
-        mCursor = newCursor;
-
-        // If the new cursor is null, and if so notify.
-        if(!newCursor.equals(null))
-            this.notifyDataSetChanged();
-
+        notifyItemInserted(position);
     }
 
     public class EventViewHolder extends RecyclerView.ViewHolder{

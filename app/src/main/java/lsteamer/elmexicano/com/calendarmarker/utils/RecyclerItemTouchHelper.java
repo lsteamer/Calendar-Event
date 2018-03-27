@@ -13,6 +13,7 @@ import lsteamer.elmexicano.com.calendarmarker.EventListAdapter.EventViewHolder;
  * Adapted by lsteamer on 13/03/2018.
  */
 
+
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;
 
